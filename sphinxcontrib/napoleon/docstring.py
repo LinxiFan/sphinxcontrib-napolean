@@ -152,6 +152,15 @@ class GoogleDocstring(UnicodeMixin):
                 'warns': self._parse_warns_section,
                 'yield': self._parse_yields_section,
                 'yields': self._parse_yields_section,
+
+                # =============== ADDED ===============
+                'tip': self._parse_tip_section,
+                'caution': self._parse_caution_section,
+                'attention': self._parse_attention_section,
+                'hint': self._parse_hint_section,
+                'danger': self._parse_danger_section,
+                'important': self._parse_important_section,
+                'error': self._parse_error_section,
             }  # type: Dict[unicode, Callable]
         self._parse()
 
@@ -567,6 +576,13 @@ class GoogleDocstring(UnicodeMixin):
     def _parse_examples_section(self, section):
         # type: (unicode) -> List[unicode]
         use_admonition = self._config.napoleon_use_admonition_for_examples
+        # ADDED
+       #if use_admonition:
+       #    # type: (unicode) -> List[unicode]
+       #    lines = self._consume_to_next_section()
+       #    return self._format_admonition('example', lines)
+       #else:
+       #    return self._parse_generic_section(section, use_admonition)
         return self._parse_generic_section(section, use_admonition)
 
     def _parse_usage_section(self, section):
@@ -721,6 +737,43 @@ class GoogleDocstring(UnicodeMixin):
         # type: (unicode) -> List[unicode]
         lines = self._consume_to_next_section()
         return self._format_admonition('warning', lines)
+
+    # ====================== ADDED ======================
+    def _parse_tip_section(self, section):
+        # type: (unicode) -> List[unicode]
+        lines = self._consume_to_next_section()
+        return self._format_admonition('tip', lines)
+
+    def _parse_caution_section(self, section):
+        # type: (unicode) -> List[unicode]
+        lines = self._consume_to_next_section()
+        return self._format_admonition('caution', lines)
+
+    def _parse_attention_section(self, section):
+        # type: (unicode) -> List[unicode]
+        lines = self._consume_to_next_section()
+        return self._format_admonition('attention', lines)
+
+    def _parse_hint_section(self, section):
+        # type: (unicode) -> List[unicode]
+        lines = self._consume_to_next_section()
+        return self._format_admonition('hint', lines)
+
+    def _parse_danger_section(self, section):
+        # type: (unicode) -> List[unicode]
+        lines = self._consume_to_next_section()
+        return self._format_admonition('danger', lines)
+
+    def _parse_important_section(self, section):
+        # type: (unicode) -> List[unicode]
+        lines = self._consume_to_next_section()
+        return self._format_admonition('important', lines)
+
+    def _parse_error_section(self, section):
+        # type: (unicode) -> List[unicode]
+        lines = self._consume_to_next_section()
+        return self._format_admonition('error', lines)
+    # ====================================================
 
     def _parse_warns_section(self, section):
         # type: (unicode) -> List[unicode]

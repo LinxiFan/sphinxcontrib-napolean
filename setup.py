@@ -17,13 +17,11 @@ version_path = os.path.join('sphinxcontrib', 'napoleon', '_version.py')
 exec(open(version_path).read())
 
 setup(
-    name='sphinxcontrib-napoleon',
+    name='sphinxcontrib-napoleon2',
     version=__version__,
     url='https://sphinxcontrib-napoleon.readthedocs.io',
     download_url='http://pypi.python.org/pypi/sphinxcontrib-napoleon',
     license='BSD',
-    author='Rob Ruana',
-    author_email='rob@robruana.com',
     description=__doc__,
     long_description=open('README.rst', 'r').read(),
     zip_safe=False,
