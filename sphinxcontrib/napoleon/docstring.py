@@ -576,14 +576,13 @@ class GoogleDocstring(UnicodeMixin):
     def _parse_examples_section(self, section):
         # type: (unicode) -> List[unicode]
         use_admonition = self._config.napoleon_use_admonition_for_examples
-        # ADDED
-       #if use_admonition:
-       #    # type: (unicode) -> List[unicode]
-       #    lines = self._consume_to_next_section()
-       #    return self._format_admonition('example', lines)
-       #else:
-       #    return self._parse_generic_section(section, use_admonition)
-        return self._parse_generic_section(section, use_admonition)
+        # ADDED: new .example directive
+        if use_admonition:
+            # type: (unicode) -> List[unicode]
+            lines = self._consume_to_next_section()
+            return self._format_admonition('example', lines)
+        else:
+            return self._parse_generic_section(section, use_admonition)
 
     def _parse_usage_section(self, section):
         # type: (unicode) -> List[unicode]
@@ -773,6 +772,11 @@ class GoogleDocstring(UnicodeMixin):
         # type: (unicode) -> List[unicode]
         lines = self._consume_to_next_section()
         return self._format_admonition('error', lines)
+
+    def _parse_example_section(self, section):
+        # type: (unicode) -> List[unicode]
+        lines = self._consume_to_next_section()
+        return self._format_admonition('example', lines)
     # ====================================================
 
     def _parse_warns_section(self, section):
