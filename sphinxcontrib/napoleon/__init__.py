@@ -10,7 +10,7 @@ import sys
 from six import PY2, iteritems
 
 from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
-from sphinxcontrib.napoleon.directives import ExampleDirective
+from sphinxcontrib.napoleon.directives import *
 from sphinxcontrib.napoleon._version import __version__
 assert __version__  # silence pyflakes
 
@@ -294,8 +294,9 @@ def setup(app):
     _patch_python_domain()
 
     # ============= ADDED =============
-    # support Examples
+    # support Examples and References directive
     app.add_directive('example', ExampleDirective)
+    app.add_directive('references', ReferencesDirective)
     app.connect('autodoc-process-docstring', _process_docstring)
     app.connect('autodoc-skip-member', _skip_member)
 

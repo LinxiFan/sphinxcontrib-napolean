@@ -144,6 +144,7 @@ class GoogleDocstring(UnicodeMixin):
                 'return': self._parse_returns_section,
                 'returns': self._parse_returns_section,
                 'raises': self._parse_raises_section,
+                'reference': self._parse_references_section,
                 'references': self._parse_references_section,
                 'see also': self._parse_see_also_section,
                 'todo': self._parse_todo_section,
@@ -691,7 +692,13 @@ class GoogleDocstring(UnicodeMixin):
     def _parse_references_section(self, section):
         # type: (unicode) -> List[unicode]
         use_admonition = self._config.napoleon_use_admonition_for_references
-        return self._parse_generic_section('References', use_admonition)
+        # ADDED: new .references directive in directives.py
+        if use_admonition:
+            # type: (unicode) -> List[unicode]
+            lines = self._consume_to_next_section()
+            return self._format_admonition('references', lines)
+        else:
+            return self._parse_generic_section('References', use_admonition)
 
     def _parse_returns_section(self, section):
         # type: (unicode) -> List[unicode]
@@ -772,11 +779,6 @@ class GoogleDocstring(UnicodeMixin):
         # type: (unicode) -> List[unicode]
         lines = self._consume_to_next_section()
         return self._format_admonition('error', lines)
-
-    def _parse_example_section(self, section):
-        # type: (unicode) -> List[unicode]
-        lines = self._consume_to_next_section()
-        return self._format_admonition('example', lines)
     # ====================================================
 
     def _parse_warns_section(self, section):
