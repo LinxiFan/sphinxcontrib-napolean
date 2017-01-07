@@ -2,7 +2,7 @@
 # Copyright 2014 Rob Ruana
 # Licensed under the BSD License, see LICENSE file for details.
 
-"""Sphinx "napoleon" extension."""
+"""Modified Sphinx "napoleon" extension."""
 
 import os
 import sys
@@ -20,7 +20,7 @@ setup(
     name='sphinxcontrib-napoleon2',
     version=__version__,
     url='https://sphinxcontrib-napoleon.readthedocs.io',
-    download_url='http://pypi.python.org/pypi/sphinxcontrib-napoleon',
+    download_url='http://github.com/LinxiFan/sphinxcontrib-napoleon',
     license='BSD',
     description=__doc__,
     long_description=open('README.rst', 'r').read(),
